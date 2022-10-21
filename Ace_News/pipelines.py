@@ -1,8 +1,9 @@
 from itemadapter import ItemAdapter
+from Ace_News.items import MatchesItem
 import json
 
 
-class CrawlerJsonWriterPipeline:
+class Ace_NewsPipeline:
 
     def open_spider(self, spider):
         self.file = open('items.jsonl', 'w')
