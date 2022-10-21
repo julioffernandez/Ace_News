@@ -9,7 +9,7 @@ class Tenispider(Spider):
 		for url in urls:
 			yield Request(url=url, callback=self.parse)
 
-	#Parsearr cada objeto partido de la página
+	#Parsear cada objeto partido de la página
 	def parse(self, response):
 		#matches info
         half_matches_urls = response.xpath('//div[@class="match_line score_row other_match"]/a/@href').extract()
@@ -21,23 +21,21 @@ class Tenispider(Spider):
 
     #Cada atributo de cada partido se define aquí
     def parse_match_page(self,response):
-        product = response.xpath('//h1[@class="table_div_in"]/text()').extract()
-        item_number=response.xpath('//span[@itemprop="sku"]/text()').extract()
-        retail_price=response.xpath('//span[@id="pitPriceBx"]/text()').extract()
-        price=response.xpath('//span[@id="pitSalePriceBx"]/text()').extract()
-        availability=response.xpath('//span[@class="availability"]/text()').extract()
-        condition=response.xpath('//select[@name="Condition"]/option/@value').extract()
-        warranty=response.xpath('//select[@name="Warranty"]/option/@value').extract()
-        image=response.xpath('//div[@class="itemimg"]/div/a/@href').extract_first()
 
-        item=AuthenticwatchesItem()
-        item["product"]=product
-        item["item_number"]=item_number
-        item["retail_price"]=retail_price
-        item["price"]=price
-        item["availability"]=availability
-        item["condition"]=condition
-        item["warranty"]=warranty
-        item["image"]=image
+        item=MatchesItem()
+        item["url"]=" "
+        #item["url"]=self.url 
+        item["equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div/div[3]/div/div/div[2]/div[1]').extract()
+        item["equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div/div[3]/div/div/div[3]/div[1]').extract()
+        item["set_1_equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[2]/div[3]').extract()
+        item["set_1_equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[3]/div[3]').extract()
+        item["set_2_equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[2]/div[4]').extract()
+        item["set_2_equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[3]/div[4]').extract()
+        item["set_3_equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[2]/div[5]').extract()
+        item["set_3_equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[3]/div[5]').extract()
+        item["set_4_equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[2]/div[6]').extract()
+        item["set_4_equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[3]/div[6]').extract()
+        item["set_5_equipo_1"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[2]/div[7]').extract()
+        item["set_5_equipo_2"]=response.xpath('/html/body/div[8]/div[2]/div[7]/div[3]/div[2]/div/div/div[6]/div[1]/div[1]/div/div/div[3]/div[7]').extract()
 
         yield item
