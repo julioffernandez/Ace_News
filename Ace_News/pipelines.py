@@ -1,17 +1,33 @@
 from itemadapter import ItemAdapter
+import json
 
 
-class CrawlerPipeline:
+class CrawlerJsonWriterPipeline:
+
+    def open_spider(self, spider):
+        self.file = open('items.jsonl', 'w')
+
+    def close_spider(self, spider):
+        self.file.close()
+
     def process_item(self, item, spider):
-        if isinstance(item, CrawlerItem):
+        if isinstance(item, MatchesItem):
             url: str = item['url']
-            html: bytes = item['html']
-            page_slug: str = get_organization_slug_from_url(url)
-            page_domain: str = spider.allowed_domains[0]
-            path_to_save: str = SAVE_PATH.format(page_domain)
+            equipo_1: str = item['equipo_1']
+            equipo_2: str = item['equipo_2']
+            set_1_equipo_1: str = item['set_1_equipo_1']
+            set_1_equipo_2: str = item['set_1_equipo_2']
+            set_2_equipo_1: str = item['set_2_equipo_1']
+            set_2_equipo_2: str = item['set_2_equipo_2']
+            set_3_equipo_1: str = item['set_3_equipo_1']
+            set_3_equipo_2: str = item['set_3_equipo_2']
+            set_4_equipo_1: str = item['set_4_equipo_1']
+            set_4_equipo_2: str = item['set_4_equipo_2']
+            set_5_equipo_1: str = item['set_5_equipo_1']
+            set_5_equipo_2: str = item['set_5_equipo_2']
 
-            save_into_html(html, path_to_save, f"{page_domain}-{page_slug}")
-
+        line = json.dumps(ItemAdapter(item).asdict()) + "\n"
+        self.file.write(line)            
         return item
 
 
