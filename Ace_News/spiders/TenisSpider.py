@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 
 class Tenispider(Spider):
 	name = "TenisSpider"
-	allowed_url=["https://www.xscores.com/tennis"]
+	allowed_url=["https://www.xscores.com/tennis/finished-games"]
 
 	def start_requests(self):
-		urls = ['https://www.xscores.com/tennis']
+		urls = ['https://www.xscores.com/tennis/finished-games']
 		for url in urls:
 			yield Request(url=url, callback=self.parse)
 
@@ -19,8 +19,8 @@ class Tenispider(Spider):
 		for matches in matcheslinks:
 			item=MatchesItem()
 			item["url"]='https://www.xscores.com' + response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/@href').getall()[i]
-			item["equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/text()').getall()[i]
-			item["equipo_2"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/text()').getall()[i]
+			item["equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/b/text()').getall()[i]
+			item["equipo_2"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/b/text()').getall()[i]
 			item["set_1_equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[8]/div[1]/text()').getall()[i]
 			item["set_1_equipo_2"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[8]/div[2]/text()').getall()[i]
 			item["set_2_equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[9]/div[1]/text()').getall()[i]
