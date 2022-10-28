@@ -26,6 +26,8 @@ class Ace_NewsPipeline:
             set_4_equipo_2: str = item['set_4_equipo_2']
             set_5_equipo_1: str = item['set_5_equipo_1']
             set_5_equipo_2: str = item['set_5_equipo_2']
+            resultadofinal_1: str = item['resultadofinal_1']
+            resultadofinal_2: str = item['resultadofinal_2']
 
         line = json.dumps(ItemAdapter(item).asdict()) + "\n"
         self.file.write(line)            

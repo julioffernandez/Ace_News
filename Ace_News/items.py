@@ -14,3 +14,5 @@ class MatchesItem(scrapy.Item):
 	set_4_equipo_2 = scrapy.Field()
 	set_5_equipo_1 = scrapy.Field()
 	set_5_equipo_2 = scrapy.Field()
+	resultadofinal_1 = scrapy.Field()
+	resultadofinal_2 = scrapy.Field()
