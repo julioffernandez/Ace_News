@@ -33,7 +33,7 @@ class Tenispider(Spider):
 			item["set_5_equipo_2"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[12]/div[2]/text()').getall()[i]
 			item["resultadofinal_1"] =response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[13]/div[1]/text()').getall()[i]
 			item["resultadofinal_2"] =response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[13]/div[2]/text()').getall()[i]
-			i+=i
+			i=i+1
 			yield item
 
 	#Parsear cada objeto partido de la página
