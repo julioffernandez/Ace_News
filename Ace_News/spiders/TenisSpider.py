@@ -16,15 +16,21 @@ class Tenispider(Spider):
 	def parse(self,response):
 		matcheslinks = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]').getall()
 		i=0
+		aux1 = 0
+		aux2 = 0
 		for matches in matcheslinks:
 			item=MatchesItem()
 			item["url"]='https://www.xscores.com' + response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/@href').getall()[i]
-			team1 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/b/text()').getall()[i]
-			team2 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/b/text()').getall()[i]
-			if (team1 != "Walkover" & team1 != "Retired"):
-				item["equipo_1"]= team1
-			if (team2 != "Walkover" & team1 != "Retired"):
-				item["equipo_2"]= team2
+			team1 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/b/text()').getall()[i+aux1]
+			team2 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/b/text()').getall()[i+aux2]
+			while(team1 == "Walkover" or team1 == "Retired"):
+				aux1=aux1+1
+				team1 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[1]/div[2]/span/b/text()').getall()[i+aux1]
+			item["equipo_1"]= team1
+			while(team2 == "Walkover" or team2 == "Retired"):
+				aux2=aux2+1
+				team2 = response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/text() | /html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[5]/div[2]/div[2]/span/b/text()').getall()[i+aux2]
+			item["equipo_2"]= team2
 			item["set_1_equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[8]/div[1]/text()').getall()[i]
 			item["set_1_equipo_2"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[8]/div[2]/text()').getall()[i]
 			item["set_2_equipo_1"]=response.xpath('/html/body/div[6]/div[2]/div[7]/div[5]/div[2]/div[1]//a[@class="match_line score_row other_match"]/div[9]/div[1]/text()').getall()[i]
