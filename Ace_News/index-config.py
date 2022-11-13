@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
-es = Elasticsearch(host="https://localhost:9200", ca_certs="path/to/CA_certs", basic_auth=("elastic", "hbKtK0I91gjzHhMpHswS"))
+es = Elasticsearch("https://localhost:9200", ca_certs="../../elasticsearch-8.5.0-linux-x86_64/elasticsearch-8.5.0/config/certs/http_ca.crt", basic_auth=("elastic", "Py_ZU5dk2C6RMTp0gkuA"))
 
 mappings = {
         "properties": {
