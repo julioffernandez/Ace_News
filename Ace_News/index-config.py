@@ -1,3 +1,6 @@
+# ESTE ARCHIVO NO SE DEBE EJECUTAR
+# El índice ya ha sido creado y no es necesario volver a ejecutar este código
+
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
