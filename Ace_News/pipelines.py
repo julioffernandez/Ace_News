@@ -1,5 +1,5 @@
 from itemadapter import ItemAdapter
-from Ace_News.items import MatchesItem
+from Ace_News.items import MatchesItem, ArticlesItem
 import json
 
 
@@ -28,8 +28,15 @@ class Ace_NewsPipeline:
             set_5_equipo_2: str = item['set_5_equipo_2']
             resultadofinal_1: str = item['resultadofinal_1']
             resultadofinal_2: str = item['resultadofinal_2']
-
-        line = json.dumps(ItemAdapter(item).asdict()) + "\n"
+        else:
+            if isinstance(item, ArticlesItem):
+                url: str = item['url']
+                title: str = item["title"]
+                extract: str = item["extract"]
+                image: str = item["image"]
+                time: str = item["time"]
+                tags: str = item["tags"]
+        line = json.dumps(ItemAdapter(item).asdict(), ensure_ascii=False) + "\n"
         self.file.write(line)            
         return item
 

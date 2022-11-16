@@ -16,3 +16,12 @@ class MatchesItem(scrapy.Item):
 	set_5_equipo_2 = scrapy.Field()
 	resultadofinal_1 = scrapy.Field()
 	resultadofinal_2 = scrapy.Field()
+
+
+class ArticlesItem(scrapy.Item):
+	url = scrapy.Field()
+	title = scrapy.Field()
+	extract = scrapy.Field()
+	image = scrapy.Field()
+	time = scrapy.Field()
+	tags = scrapy.Field()
