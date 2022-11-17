@@ -8,5 +8,6 @@ Proyecto scrapy para la asignaturas *Análisis de Sistemas de Información* y *R
 - Lucas José Lara García 
 
 **Tecnologías:**
+- scrapy
 - elasticsearch-8.5.0
 - kibana-8.5.0
