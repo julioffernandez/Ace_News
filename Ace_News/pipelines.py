@@ -6,7 +6,7 @@ import json
 class Ace_NewsPipeline:
 
     def open_spider(self, spider):
-        self.file = open('items.jsonl', 'w')
+        self.file = open('items.json', 'w')
 
     def close_spider(self, spider):
         self.file.close()
