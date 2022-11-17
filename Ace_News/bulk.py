@@ -6,7 +6,7 @@ from elasticsearch import Elasticsearch, helpers
 
 es = Elasticsearch("https://localhost:9200",
                    ca_certs="../../elasticsearch-8.5.0-linux-x86_64/elasticsearch-8.5.0/config/certs/http_ca.crt",
-                   basic_auth=("elastic", "YXc6NPIiTBv0o5BE6Hh2"))
+                   basic_auth=("elastic", "0pou6*5fBlq9=qkZQUuz"))
 
 '''
 Push bulk data from a JSON file into an Elasticsearch index
