@@ -1,6 +1,4 @@
 import json
-import os
-import uuid
 
 from elasticsearch import Elasticsearch, helpers
 
@@ -16,14 +14,14 @@ Push bulk data from a JSON file into an Elasticsearch index
 def bulk_json_data(path):
     with open(path, encoding="utf8") as f:
         with open(path, 'r') as f:
-            games = []
+            news = []
             for line in f:
-                games.append(json.loads(line))
-        return games
+                news.append(json.loads(line))
+        return news
 
 
 # make the bulk call, and get a response
-b = bulk_json_data("../items.json")
+b = bulk_json_data("../news.json")
 
-response = helpers.bulk(es, b, index='games')
+response = helpers.bulk(es, b, index='news')
 print("\nbulk_json_data() RESPONSE:", response)
