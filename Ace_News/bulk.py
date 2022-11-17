@@ -6,12 +6,13 @@ from elasticsearch import Elasticsearch, helpers
 
 es = Elasticsearch("https://localhost:9200",
                    ca_certs="../../elasticsearch-8.5.0-linux-x86_64/elasticsearch-8.5.0/config/certs/http_ca.crt",
-                   basic_auth=("elastic", "Py_ZU5dk2C6RMTp0gkuA"))
-
+                   basic_auth=("elastic", "YXc6NPIiTBv0o5BE6Hh2"))
 
 '''
 Push bulk data from a JSON file into an Elasticsearch index
 '''
+
+
 def bulk_json_data(path):
     with open(path, encoding="utf8") as f:
         with open(path, 'r') as f:
@@ -19,8 +20,6 @@ def bulk_json_data(path):
             for line in f:
                 games.append(json.loads(line))
         return games
-
-
 
 
 # make the bulk call, and get a response
