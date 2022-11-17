@@ -12,12 +12,11 @@ Push bulk data from a JSON file into an Elasticsearch index
 
 
 def bulk_json_data(path):
-    with open(path, encoding="utf8") as f:
-        with open(path, 'r') as f:
-            games = []
-            for line in f:
-                games.append(json.loads(line))
-        return games
+    with open(path, 'r', encoding="utf8") as f:
+        games = []
+        for line in f:
+            games.append(json.loads(line))
+    return games
 
 
 # make the bulk call, and get a response
